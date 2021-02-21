@@ -31,3 +31,10 @@ keytool -exportcert -rfc -alias mytomcatclient.com -file mytomcatclient.cer -key
 
 keytool -importcert -alias mytomcatclient.com -file mytomcatclient.cer -keystore mytomcatserver.jks -storepass mytomcatserverstorepass -noprompt
 ----
+
+
+----
+# This command can be user to export the mytomcatclient.jks private key into a pfx file for import into windows certificate store
+
+keytool -importkeystore -srckeystore mytomcatclient.jks -srcstoretype JKS -srcstorepass mytomcatclientstorepass -destkeystore mytomcatclient.pfx -deststoretype PKCS12 -deststorepass mytomcatclientstorepass
+----
