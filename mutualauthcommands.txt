@@ -1,0 +1,33 @@
+# For the following commands, set the values in parenthesis to be whatever makes sense for your environment.  The parenthesis are not necessary for the command.
+
+----
+# This is an all-in-one command that generates a certificate for the server and places it in a keystore file, while setting both the certifcate password and the keystore password.
+# The net result is a file called "mytomcatserver.jks". 
+
+keytool -genkeypair -alias mytomcatserver.com -keyalg RSA -dname "CN=mytomcatserver.com,OU=mytomcatserver ou,O=mytomcatserver org,L=Austin,ST=Texas,C=US" -keystore mytomcatserver.jks -storepass mytomcatserverstorepass -keypass mytomcatserverkeypass
+Optional -keypass mytomcatserverkeypass
+----
+
+
+----
+# This is the all-in-one command that generates the certificate for the client and places it in a keystore file, while setting both the certificate password and the keystore password.
+# The net result is a file called "mytomcatclient.jks"
+
+keytool -genkeypair -alias mytomcatclient.com -keyalg RSA -dname "CN=mytomcatclient.com,OU=mytomcatclient ou,O=mytomcatclient org,L=Austin,ST=Texas,C=US" -keystore mytomcatclient.jks -storepass mytomcatclientstorepass -keypass mytomcatclientkeypass
+Optional -keypass mytomcatclientkeypass
+----
+
+
+----
+# This command exports the client certificate.  
+# The net result is a file called "client.cer" in your home directory.
+
+keytool -exportcert -rfc -alias mytomcatclient.com -file mytomcatclient.cer -keystore mytomcatclient.jks -storepass mytomcatclientstorepass -keypass mytomcatclientkeypass
+----
+
+
+----
+# This command imports the client certificate into the "mytomcatserver.jks" file.
+
+keytool -importcert -alias mytomcatclient.com -file mytomcatclient.cer -keystore mytomcatserver.jks -storepass mytomcatserverstorepass -noprompt
+----
