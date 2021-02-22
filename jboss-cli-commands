@@ -1,0 +1,7 @@
+# First add a jboss certificate realm to the standalone xml.
+
+/core-service=management/security-realm=CertificateRealm:add()
+
+/core-service=management/security-realm=CertificateRealm/server-identity=ssl:add(keystore-path=/C/Jboss73/standalone/configuration/mytomcatserver.jks,keystore-password=mytomcatserverstorepass, alias=mytomcatserver.com)
+
+/core-service=management/security-realm=CertificateRealm/authentication=truststore:add(keystore-path=C:\\Jboss73\\standalone\\configuration\\mytomcatserver.jks,keystore-password=mytomcatserverstorepass)
